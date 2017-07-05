@@ -36,6 +36,12 @@ public class IOUtil {
 
     private static void loadMeta() throws Exception{
 
+        if(!isRefresh){
+            return;
+        }
+
+        isRefresh = false;
+
         String apps = System.getProperty(CommonUtil.appNames);
         StringTokenizer tokenizer = new StringTokenizer(apps, ",");
         while(tokenizer.hasMoreElements()){
@@ -106,6 +112,10 @@ public class IOUtil {
             criteriaList.add(criteria);
         }
         return criteriaList;
+    }
+
+    public static void refresh(){
+        isRefresh = true;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.sales.tax.registry;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Created by Nilesh on 04-07-2017.
@@ -55,8 +56,64 @@ public class Quantity {
         return this.unit != null? this.unit.getName() : "";
     }
 
+
     public Unit getUnit(){
         return this.unit;
+    }
+
+    public void add(long add){
+        add(new BigDecimal(add));
+    }
+
+    public void add(double add){
+        add(new BigDecimal(add));
+    }
+
+    public void add(BigDecimal add){
+        this.number = this.number.add(add);
+    }
+
+    public void add(Quantity quantity){
+        add(quantity.number);
+    }
+
+    public void multiply(long multi){
+        multiply(new BigDecimal(multi));
+    }
+
+    public void multiply(double multi){
+        multiply(new BigDecimal(multi));
+    }
+
+    public void multiply(BigDecimal multi){
+        this.number = this.number.multiply(multi);
+    }
+
+    public void multiply(Quantity quantity){
+        multiply(quantity.number);
+    }
+
+    public void divide(long divide){
+        divide(new BigDecimal(divide));
+    }
+
+    public void divide(double divide){
+        divide(new BigDecimal(divide));
+    }
+
+
+    public void divide(BigDecimal divide){
+        this.number = this.number.divide(divide);
+    }
+
+    public void divide(Quantity quantity){
+        divide(quantity.number);
+    }
+
+    public Quantity roundUp(double roundUpTo){
+        BigDecimal roundUp = BigDecimal.valueOf(roundUpTo);
+        this.number = this.number.divide(roundUp).setScale(0, RoundingMode.UP).multiply(roundUp);
+        return this;
     }
 
 }
