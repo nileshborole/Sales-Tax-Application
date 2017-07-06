@@ -8,6 +8,7 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -19,10 +20,10 @@ import static junit.framework.Assert.assertTrue;
  */
 public class TestInputParser {
 
-    private static final Function<Value, Person> fun = (v) -> {
+    private static final Function<Value, Map<String, String>> fun = (v) -> {
         if(v != null){
             Map<String, String> values = (Map)v.getValue();
-            return new Person(values.get("name"), Integer.parseInt(values.get("age")));
+            return values;
         }
         return null;
     };
@@ -38,11 +39,23 @@ public class TestInputParser {
     @Test
     public void testInputParserWithStringInput(){
         try {
-            String testStr = "My name is Nilesh. My age is 27.";
+            String testStr = "1 imported bottle of perfume at 47.50";
+            Map<String, String> expected = new HashMap<String, String>();
+            expected.put("unit", "bottle");
+            expected.put("quantity", "1");
+            expected.put("price", "47.50");
+            expected.put("imported", "imported");
+            expected.put("name", "perfume");
             InputParser parser = IOUtil.getInputParser("test");
 
-            Person parsedPerson = parser.parse(testStr, fun);
-            assert(person.equals(parsedPerson));
+            Map<String, String> extractedValues = parser.parse(testStr, fun);
+
+
+            System.out.println(extractedValues);
+
+            for(Map.Entry<String, String> entry : expected.entrySet()){
+                assert(entry.getValue().equals(expected.get(entry.getKey())));
+            }
 
         }catch (Exception e){
             e.printStackTrace();
@@ -51,10 +64,6 @@ public class TestInputParser {
     }
 
 
-    @Test
-    public void testInputParserWithFileput(){
-
-    }
 
 
 }

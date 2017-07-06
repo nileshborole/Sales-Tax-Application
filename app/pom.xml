@@ -13,11 +13,56 @@
     <packaging>jar</packaging>
     <name>app</name>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+
+
+                <configuration>
+                    <mainClass>com.sales.tax.app.RunSalesTaxApplication</mainClass>
+                    <skip>false</skip>
+                    <arguments>
+                        <argument>salesInput</argument>
+                    </arguments>
+                    <systemProperties>
+                        <property>
+                            <key>app.name.property</key>
+                            <value>sales</value>
+                        </property>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>org.jdom</groupId>
             <artifactId>jdom2</artifactId>
             <version>2.0.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
         </dependency>
 
         <dependency>
@@ -38,8 +83,6 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
-
-
 
     </dependencies>
 

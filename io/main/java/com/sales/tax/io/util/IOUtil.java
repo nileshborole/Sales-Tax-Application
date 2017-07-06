@@ -97,7 +97,6 @@ public class IOUtil {
             Criteria criteria = null;
             if(CommonUtil.isNullOrEmpty(type) || "regex".equalsIgnoreCase(type)){
                 criteria = new SimpleRegexCriteria(regex, key, groupKeys);
-
             }else if("custom".equalsIgnoreCase(type)){
                 String className = criteriaElement.getAttributeValue("class");
                 if(CommonUtil.isNullOrEmpty(className))

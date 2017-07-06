@@ -1,0 +1,21 @@
+<config>
+
+    <tax-categories>
+        <category code="1" name="basic" />
+        <category code="2" name="imported"/>
+    </tax-categories>
+
+    <taxes>
+        <tax id="tax01">
+            <title>Basic Tax</title>
+            <percentage>10</percentage>
+            <category-code>1</category-code>
+        </tax>
+        <tax id="tax02">
+            <title>Import Tax</title>
+            <percentage>5</percentage>
+            <category-code>2</category-code>
+        </tax>
+    </taxes>
+
+</config>
