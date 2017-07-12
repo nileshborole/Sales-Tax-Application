@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<io-config name="test-io-config">
+
+    <input-parser>
+        <id>test</id>
+        <criteria-list>
+            <criteria>
+                <key>regex1</key>
+                <regex>^(?&lt;quantity&gt;\d+)\s+(?&lt;unit&gt;\w+)\s+of\s+(?&lt;imported&gt;imported)\s+(?&lt;name&gt;.+)\s+at\s+(?&lt;price&gt;\d+(\.\d+)?)</regex>
+                <group-keys>quantity,unit,imported,name,price</group-keys>
+            </criteria>
+
+            <criteria>
+                <key>regex2</key>
+                <regex>^(?&lt;quantity&gt;\d+)\s+(?&lt;imported&gt;imported)\s+(?&lt;unit&gt;\w+)\s+of\s+(?&lt;name&gt;.+)\s+at\s+(?&lt;price&gt;\d+(\.\d+)?)</regex>
+                <group-keys>quantity,unit,imported,name,price</group-keys>
+            </criteria>
+
+            <criteria>
+                <key>regex3</key>
+                <regex>^(?&lt;quantity&gt;\d+)\s+((?&lt;unit&gt;\w+)\s+of\s+)?(?&lt;name&gt;.+)\s+at\s+(?&lt;price&gt;\d+(\.\d+)?)</regex>
+                <group-keys>quantity,unit,name,price</group-keys>
+            </criteria>
+
+        </criteria-list>
+    </input-parser>
+
+</io-config>

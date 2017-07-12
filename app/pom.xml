@@ -35,17 +35,22 @@
 
 
                 <configuration>
+                    <includePluginDependencies>true</includePluginDependencies>
                     <mainClass>com.sales.tax.app.RunSalesTaxApplication</mainClass>
                     <skip>false</skip>
-                    <arguments>
-                        <argument>salesInput</argument>
-                    </arguments>
+                    <commandlineArgs>salesInput</commandlineArgs>
+
                     <systemProperties>
-                        <property>
+                        <systemProperty>
                             <key>app.name.property</key>
                             <value>sales</value>
-                        </property>
+                        </systemProperty>
+                        <systemProperty>
+                            <key>app.settings.directory</key>
+                            <value>${pom.basedir}/settings</value>
+                        </systemProperty>
                     </systemProperties>
+
                 </configuration>
             </plugin>
         </plugins>

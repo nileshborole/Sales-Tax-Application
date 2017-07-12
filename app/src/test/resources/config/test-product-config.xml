@@ -1,0 +1,42 @@
+<config>
+
+    <global-taxes>
+        <tax id="tax02" />
+    </global-taxes>
+
+    <categories>
+        <category id="pctgr01" title="Food">
+            <products>
+                <product id="prod01" name="chocolates"/>
+                <product id="prod02" name="chocolate bar"/>
+            </products>
+        </category>
+
+        <category id="pctgr02" title="Book">
+            <products>
+                <product id="prod03" name="book"/>
+                <product id="prod04" name="comics"/>
+            </products>
+        </category>
+
+        <category id="pctgr03" title="Medical_Products">
+            <products>
+                <product id="prod05" name="headache pills"/>
+                <product id="prod06" name="pain killer"/>
+            </products>
+        </category>
+
+        <category id="pctgr04" title="Other">
+            <taxes>
+                <tax id="tax01" />
+            </taxes>
+            <products>
+                <product id="prod07" name="perfume"/>
+                <product id="prod08" name="music cd"/>
+            </products>
+        </category>
+
+
+    </categories>
+
+</config>

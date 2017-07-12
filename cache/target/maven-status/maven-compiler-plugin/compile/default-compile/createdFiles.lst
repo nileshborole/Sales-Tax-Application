@@ -1,0 +1,7 @@
+com\sales\tax\cache\impl\CacheType$1.class
+com\sales\tax\cache\CacheFactory.class
+com\sales\tax\cache\impl\LocalCache.class
+com\sales\tax\cache\registry\CacheIdentifier.class
+com\sales\tax\cache\impl\CacheType.class
+com\sales\tax\cache\registry\Cache.class
+com\sales\tax\cache\CacheManager.class
