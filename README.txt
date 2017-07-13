@@ -23,9 +23,25 @@
 
 
 ======================================================================================================================
-Time spent on testing : 1.5 hrs
-Total time required : 8 hrs.
+Time spent on testing : 3.5 hrs
+Total time required : 12 hrs.
 
 With more time I would have done
 1. Output formatter for generated receipt, as it can be printed on web, downloaded as pdf/doc.
 2. Custom exceptions to improve logging.
+    Refactoring of common code like application custom exceptions and CommonUtil to separate common module.
+
+====================================================MODULES========================================================
+
+Modules:
+1. io module     : io module responsible for parsing using inputs. Parsing criteria is configurable.
+                    Advantage of io module is user can configure new type of parsing logic without changing code
+                    eg: regex,custom code.
+2. cache module  : cache module is independent module and provide factory of different types of cache.
+                    All modules of application depends on cache. It abstracts the Cache implementation so we can change out
+                    caching implementation without affecting other modules. We can also provide diffent types of cache
+                    implementation like local, remote or distributes cache.
+3. app module    : This is a main module which contains application entity like Tax, Product etc and responsible for
+                    generating receipt from given list of PurchasedProduct.
+
+

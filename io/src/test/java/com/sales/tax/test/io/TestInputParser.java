@@ -1,6 +1,8 @@
 package com.sales.tax.test.io;
 
 import com.sales.tax.io.InputParser;
+import com.sales.tax.io.exceptions.CommonExceptionMessage;
+import com.sales.tax.io.exceptions.CriteriaEvaluationException;
 import com.sales.tax.io.registry.Value;
 import com.sales.tax.io.util.CommonUtil;
 import com.sales.tax.io.util.IOUtil;
@@ -75,7 +77,7 @@ public class TestInputParser {
             
             Map<String, String> extractedValues = parser.parse(testStr, fun);
             
-             System.out.println(extractedValues);
+            System.out.println(extractedValues);
 
             for(Map.Entry<String, String> entry : expected.entrySet()){
                 assert(entry.getValue().equals(expected.get(entry.getKey())));
@@ -90,7 +92,6 @@ public class TestInputParser {
     @Test
     public void testInputParserWithStrictCriteriaNegative(){
         try{
-            
             String testStr = "1 bottle of perfume at 47.50";
             Map<String, String> expected = new HashMap<String, String>();
             expected.put("unit", "bottle");
@@ -99,18 +100,42 @@ public class TestInputParser {
             expected.put("imported", "imported");
             expected.put("name", "perfume");
             InputParser parser = IOUtil.getInputParser("test-strict");
-            
-            Map<String, String> extractedValues = parser.parse(testStr, fun);
-            
-            System.out.println(extractedValues);
 
-            assert(extractedValues.get("imported") == null);
-            
+            Map<String, String> extractedValues = parser.parse(testStr, fun);
+
+            assert (extractedValues == null);
+        } catch (CriteriaEvaluationException e){
+            e.printStackTrace();
+            assert (CommonExceptionMessage.REGEX_NOT_MATCHED.getId().equals( e.getExceptionMessage().getId()));
         }catch(Exception e){
             e.printStackTrace();
             assert(false);
         }
     }
 
+
+    @Test
+    public void testInputParserWithStrictCriteriaNegative1(){
+        try{
+            String testStr = "1 imported bottle of perfume at 47.50";
+            Map<String, String> expected = new HashMap<String, String>();
+            expected.put("measurement", "bottle");
+            expected.put("quantity", "1");
+            expected.put("price", "47.50");
+            expected.put("imported", "imported");
+            expected.put("name", "perfume");
+            InputParser parser = IOUtil.getInputParser("test-strict-negative");
+
+            Map<String, String> extractedValues = parser.parse(testStr, fun);
+
+            assert (extractedValues != null && "bottle".equals(extractedValues.get("measurement")));
+        } catch (CriteriaEvaluationException e){
+            //e.printStackTrace();
+            assert (CommonExceptionMessage.REGEX_NOT_MATCHED.getId().equals( e.getExceptionMessage().getId()));
+        }catch(Exception e){
+            e.printStackTrace();
+            assert(false);
+        }
+    }
 
 }

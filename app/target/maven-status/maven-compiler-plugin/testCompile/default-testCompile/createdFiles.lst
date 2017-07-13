@@ -1,1 +1,4 @@
+com\sales\tax\test\TestPurchasedProduct.class
 com\sales\tax\test\TestSalesTaxApplication.class
+com\sales\tax\test\TaxCategoryEnum.class
+com\sales\tax\test\TestAppliedTax.class

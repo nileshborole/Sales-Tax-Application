@@ -12,4 +12,6 @@ public interface Criteria<T> extends Predicate<T>, Function<T, Value> {
     Value apply(T t);
 
     boolean isStrict();
+
+    void strict();
 }

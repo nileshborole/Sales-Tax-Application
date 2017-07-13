@@ -120,4 +120,17 @@ public class Quantity {
         return this;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Quantity quantity = (Quantity) o;
+
+        if (!number.toString().equals(quantity.number.toString())) return false;
+        if (!unit.equals(quantity.unit)) return false;
+
+        return true;
+    }
+
 }

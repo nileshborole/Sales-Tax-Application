@@ -2,7 +2,12 @@ com\sales\tax\io\registry\Criteria.class
 com\sales\tax\io\criteria\SimpleRegexCriteria.class
 com\sales\tax\io\util\CommonUtil.class
 com\sales\tax\io\InputParser.class
-com\sales\tax\io\registry\Value.class
 com\sales\tax\io\util\ParserCacheIdentifier.class
+com\sales\tax\io\exceptions\AppRuntimeException.class
 com\sales\tax\io\util\IOUtil.class
+com\sales\tax\io\exceptions\AppException.class
+com\sales\tax\io\exceptions\ExceptionMessage.class
+com\sales\tax\io\registry\Value.class
+com\sales\tax\io\exceptions\CriteriaEvaluationException.class
+com\sales\tax\io\exceptions\CommonExceptionMessage.class
 com\sales\tax\io\OutputFormatter.class

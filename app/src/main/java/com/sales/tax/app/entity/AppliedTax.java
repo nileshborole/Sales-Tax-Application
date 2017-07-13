@@ -20,6 +20,10 @@ public class AppliedTax extends Tax {
     }
 
     private void calculateTaxAmount(final Quantity price){
+        if(percentage.floatValue() == 0 ){
+            this.taxAmount = new Quantity(0, price.getUnit());
+            return;
+        }
         this.taxAmount = new Quantity(price.doubleValue(), price.getUnit());
         taxAmount.multiply(percentage);
         taxAmount.divide(100);

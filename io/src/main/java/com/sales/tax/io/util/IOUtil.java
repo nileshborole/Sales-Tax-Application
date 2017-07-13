@@ -99,7 +99,7 @@ public class IOUtil {
             String key = criteriaElement.getChildText("key");
             String regex = criteriaElement.getChildText("regex");
             List<String> groupKeys = CommonUtil.toCSV(criteriaElement.getChildTextNormalize("group-keys"));
-            boolean strict = CommonUtil.isNullOrEmpty(criteriaElement.getAttributeValue("strict")) ? "TRUE".equalsIgnoreCase(criteriaElement.getAttributeValue("strict")) : false;
+            boolean strict = !CommonUtil.isNullOrEmpty(criteriaElement.getAttributeValue("strict")) ? "TRUE".equalsIgnoreCase(criteriaElement.getAttributeValue("strict")) : false;
             String type = criteriaElement.getAttributeValue("type");
             Criteria criteria = null;
             if(CommonUtil.isNullOrEmpty(type) || "regex".equalsIgnoreCase(type)){
@@ -113,7 +113,7 @@ public class IOUtil {
                 criteria = clazz.newInstance();
             }
             if(strict)
-                criteria.isStrict();
+                criteria.strict();
 
             criteriaList.add(criteria);
         }

@@ -1,8 +1,12 @@
 package com.sales.tax.io.criteria;
 
+import com.sales.tax.io.exceptions.CommonExceptionMessage;
+import com.sales.tax.io.exceptions.CriteriaEvaluationException;
 import com.sales.tax.io.registry.Criteria;
 import com.sales.tax.io.registry.Value;
 import com.sales.tax.io.util.CommonUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.util.*;
@@ -14,6 +18,7 @@ import java.util.regex.Pattern;
  */
 public class SimpleRegexCriteria implements Criteria<String> {
 
+    private static final Logger logger = LoggerFactory.getLogger(SimpleRegexCriteria.class);
     private Pattern pattern;
     private String key;
     private Matcher matcher;
@@ -34,6 +39,7 @@ public class SimpleRegexCriteria implements Criteria<String> {
         this(regex, key, null);
     }
 
+    @Override
     public void strict(){
         this.strict = true;
     }
@@ -68,15 +74,23 @@ public class SimpleRegexCriteria implements Criteria<String> {
                 return new Value(key, list);
 
             }else{
-                if(this.strict && count != this.groupKeys.size())
-                    throw new RuntimeException("Wrong regular expression. Regex group count "+count + " should be equal to group keys :"+this.groupKeys);
+                if(this.strict && count-1 != this.groupKeys.size())
+                    throw new CriteriaEvaluationException(CommonExceptionMessage.REGEX_NOT_MATCHED, "Wrong regular expression. Regex group count "+count + " should be equal to group keys :"+this.groupKeys);
 
                 Map<String, String> extractedValues = new HashMap<String, String>();
                 for(String groupKey : this.groupKeys){
-                    String temp = this.matcher.group(groupKey);
+
+                    String temp = null;
+                    try {
+                        temp = this.matcher.group(groupKey);
+                    }catch (Exception e){
+                        if(this.strict)
+                            throw new CriteriaEvaluationException(CommonExceptionMessage.REGEX_NOT_MATCHED, e);
+                        logger.warn("Group not found :"+groupKey, e);
+                    }
 
                     if(CommonUtil.isNullOrEmpty(temp) && this.strict)
-                        throw new RuntimeException("Group '"+key+"' not found in input string :"+str);
+                        throw new CriteriaEvaluationException(CommonExceptionMessage.REGEX_NOT_MATCHED,"Group '"+key+"' not found in input string :"+str);
 
                     extractedValues.put(groupKey, temp);
                 }

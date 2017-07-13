@@ -1,5 +1,7 @@
 package com.sales.tax.app;
 
+import com.sales.tax.io.exceptions.AppException;
+import com.sales.tax.io.exceptions.AppRuntimeException;
 import com.sales.tax.io.util.CommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -60,6 +62,10 @@ public class RunSalesTaxApplication {
 
         }catch (Exception e){
             logger.error("Unexpected error occurred.", e);
+            if(e instanceof AppException)
+                System.err.println("Error : "+ ((AppException) e).getExceptionMessage().getId());
+            else if(e instanceof AppRuntimeException)
+                System.err.println("Error : "+ ((AppRuntimeException) e).getExceptionMessage().getId());
         }
 
     }

@@ -22,7 +22,7 @@ public class InputParser {
 
     public InputParser(String id, List<Criteria> criteriaList){
         if(CommonUtil.isNullOrEmpty(criteriaList))
-            throw new NullPointerException("");
+            throw new NullPointerException("No criteria found!..");
         this.criteriaList = criteriaList;
         this.id = id;
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="com.sales.tax.test.TestSalesTaxApplication" time="0.219" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="com.sales.tax.test.TestAppliedTax" time="0.019" errors="0" skipped="0">
   <properties>
     <property name="idea.version" value="13.1.4"/>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
@@ -63,6 +63,9 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.sales.tax.test.TestSalesTaxApplication" name="testPrintReceipt" time="0.219"/>
-  <testcase classname="com.sales.tax.test.TestSalesTaxApplication" name="testPrintReceiptWithException" time="0"/>
+  <testcase classname="com.sales.tax.test.TestAppliedTax" name="testCalculateTotalTaxRoundUp" time="0.013"/>
+  <testcase classname="com.sales.tax.test.TestAppliedTax" name="testCalculatedTotalTaxForZeroPrice" time="0.001"/>
+  <testcase classname="com.sales.tax.test.TestAppliedTax" name="testCalculateTotalTax" time="0.001"/>
+  <testcase classname="com.sales.tax.test.TestAppliedTax" name="testAppliedTaxList" time="0.004"/>
+  <testcase classname="com.sales.tax.test.TestAppliedTax" name="testCalculatedTotalTaxNegative" time="0"/>
 </testsuite>

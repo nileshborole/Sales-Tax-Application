@@ -1,6 +1,9 @@
 package com.sales.tax.test;
 
 import com.sales.tax.app.SalesTaxApplication;
+import com.sales.tax.io.exceptions.AppException;
+import com.sales.tax.io.exceptions.AppRuntimeException;
+import com.sales.tax.io.exceptions.CommonExceptionMessage;
 import com.sales.tax.io.util.CommonUtil;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +46,29 @@ public class TestSalesTaxApplication {
                 .append("Total: 83.84");
 
         assert(expected.toString().equals(result.toString()));
+
+    }
+
+    @Test
+    public void testPrintReceiptWithException() throws Exception{
+
+        try {
+            inputStrings = new ArrayList<String>();
+
+
+            inputStrings.add("1 box of imported chocolates at 11.25");
+            inputStrings.add("1 imported bottle of perfume at 47.50");
+            inputStrings.add("1 chocolate bar at 0.85");
+            inputStrings.add("1 music CD at 14.99");
+            inputStrings.add("1 LED bulb purchased at 50.99");
+            StringBuilder result = app.printReceipt(inputStrings);
+        }catch (AppRuntimeException e){
+            System.err.println(e.getExceptionMessage().getId());
+            assert (CommonExceptionMessage.INPUT_PARSE_ERROR.equals(e.getExceptionMessage()));
+        }catch (AppException e){
+            System.err.println(e.getExceptionMessage().getId());
+            assert (CommonExceptionMessage.INPUT_PARSE_ERROR.equals(e.getExceptionMessage()));
+        }
 
     }
 

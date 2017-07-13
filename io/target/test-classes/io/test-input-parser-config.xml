@@ -24,5 +24,31 @@
 
         </criteria-list>
     </input-parser>
+    
+    <input-parser>
+        <id>test-strict</id>
+        <criteria-list>
+           
+            <criteria strict="true">
+                <key>regex2</key>
+                <regex>^(?&lt;quantity&gt;\d+)\s+(?&lt;imported&gt;imported)\s+(?&lt;unit&gt;\w+)\s+of\s+(?&lt;name&gt;.+)\s+at\s+(?&lt;price&gt;\d+(\.\d+)?)$</regex>
+                <group-keys>quantity,unit,imported,name,price</group-keys>
+            </criteria>
+
+        </criteria-list>
+    </input-parser>
+
+    <input-parser>
+        <id>test-strict-negative</id>
+        <criteria-list>
+
+            <criteria strict="true">
+                <key>regex2</key>
+                <regex>^(?&lt;quantity&gt;\d+)\s+(?&lt;imported&gt;imported)\s+(?&lt;unit&gt;\w+)\s+of\s+(?&lt;name&gt;.+)\s+at\s+(?&lt;price&gt;\d+(\.\d+)?)$</regex>
+                <group-keys>quantity,measurement,imported,name,price</group-keys>
+            </criteria>
+
+        </criteria-list>
+    </input-parser>
 
 </io-config>

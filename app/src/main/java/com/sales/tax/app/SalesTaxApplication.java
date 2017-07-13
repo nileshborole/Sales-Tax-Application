@@ -11,6 +11,9 @@ import com.sales.tax.app.util.TaxUtil;
 import com.sales.tax.cache.CacheManager;
 import com.sales.tax.cache.impl.CacheType;
 import com.sales.tax.io.InputParser;
+import com.sales.tax.io.exceptions.AppException;
+import com.sales.tax.io.exceptions.AppRuntimeException;
+import com.sales.tax.io.exceptions.CommonExceptionMessage;
 import com.sales.tax.io.registry.Value;
 import com.sales.tax.io.util.CommonUtil;
 import com.sales.tax.io.util.IOUtil;
@@ -96,7 +99,7 @@ public class SalesTaxApplication {
                 }
                 products.add(product);
             }catch (Exception e){
-                throw new Exception("failed to parse input : "+str, e);
+                throw new AppException(CommonExceptionMessage.INPUT_PARSE_ERROR, new Object[] { str });
             }
         }
         Receipt receipt = generator.generateReceipt(products);
@@ -126,12 +129,12 @@ public class SalesTaxApplication {
     private PurchasedProduct purchasedProduct(Map<String, String> values){
         if(values == null){
             logger.error("Failed to parse input.");
-            throw new RuntimeException("failed to parse input");
+            throw new AppRuntimeException(CommonExceptionMessage.INPUT_PARSE_ERROR);
         }
 
         Product product = productMap.get(values.get("name").toLowerCase());
         if(product == null) {
-            throw new RuntimeException("Error while parsing input, product is not extracted.");
+            throw new AppRuntimeException(CommonExceptionMessage.INPUT_PARSE_ERROR, "Error while parsing input, product is not extracted.");
         }
 
         String priceStr = values.get("price");
@@ -140,10 +143,10 @@ public class SalesTaxApplication {
         String quantityStr = values.get("quantity");
 
         if(CommonUtil.isNullOrEmpty(priceStr))
-            throw new RuntimeException("Error while parsing input, product price is not extracted.");
+            throw new AppRuntimeException(CommonExceptionMessage.INPUT_PARSE_ERROR,"Error while parsing input, product price is not extracted.");
 
         if(CommonUtil.isNullOrEmpty(quantityStr))
-            throw new RuntimeException("Error while parsing input, product quantity is not extracted.");
+            throw new AppRuntimeException(CommonExceptionMessage.INPUT_PARSE_ERROR,"Error while parsing input, product quantity is not extracted.");
 
         Quantity price = new Quantity(new BigDecimal(priceStr), CommonUtil.isNullOrEmpty(currencyStr)? null : new CustomUnit(currencyStr));
         Quantity quantity = new Quantity(new BigDecimal(quantityStr), CommonUtil.isNullOrEmpty(unitStr)? null : new CustomUnit(unitStr) );
