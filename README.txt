@@ -22,14 +22,6 @@
 
 
 
-======================================================================================================================
-Time spent on testing : 3.5 hrs
-Total time required : 12 hrs.
-
-With more time I would have done
-1. Output formatter for generated receipt, as it can be printed on web, downloaded as pdf/doc.
-2. Custom exceptions to improve logging.
-    Refactoring of common code like application custom exceptions and CommonUtil to separate common module.
 
 ====================================================MODULES========================================================
 
