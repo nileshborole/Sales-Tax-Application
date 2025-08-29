@@ -7,6 +7,9 @@ import java.util.Map;
  */
 public interface Cache<K, V> {
 
+    /**
+    * put key value pair
+    */
     public V put(CacheIdentifier identifier,K key, V value);
 
     public void putAll(CacheIdentifier identifier, Map<K, V> values);
